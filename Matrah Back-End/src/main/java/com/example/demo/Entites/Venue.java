@@ -3,6 +3,7 @@ package com.example.demo.Entites;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,13 +60,13 @@ public class Venue {
     private Area area;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "VenueServices",
-            joinColumns = @JoinColumn(name = "venue_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id")
+            name = "venueservices",
+            joinColumns = {@JoinColumn(name = "venue_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
-    private Set<ServiceE> services;
+    private Set<ServiceE> services = new HashSet<>();
 
     @OneToMany(mappedBy = "venue")
     private List<Booking> bookings;
@@ -85,6 +86,30 @@ public class Venue {
     }
 
     public Venue() {
+    }
+
+    public Set<ServiceE> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ServiceE> services) {
+        this.services = services;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public List<Reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Reviews> reviews) {
+        this.reviews = reviews;
     }
 
     public Venue(String name, String description, String category, String address, double latitude, double longitude, boolean isSuspended, User owner, City city, Area area) {

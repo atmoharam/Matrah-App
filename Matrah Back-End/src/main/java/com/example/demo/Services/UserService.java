@@ -4,6 +4,9 @@ import com.example.demo.Entites.User;
 import com.example.demo.Repositories.UserRepository;
 import com.example.demo.Services.Interfaces.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +19,25 @@ public class UserService implements UserServiceI {
     private UserRepository userRepository;
 
     @Override
+//    @Cacheable(value = "user", key = "#id")
     public User getUserById(int id) {
         return userRepository.findById(id);
     }
 
     @Override
+//    @Cacheable(value = "user", key = "#email")
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
+//    @Cacheable(value = "user", key = "#userName")
     public User getUserByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
     @Override
+//    @Cacheable(value = "user")
     public List<User> getAllUsers() {
         return (List<User>) userRepository.findAll();
     }
@@ -55,6 +62,7 @@ public class UserService implements UserServiceI {
     }
 
     @Override
+//    @CacheEvict(value = "user", key = "#id")
     public boolean deleteUser(int id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);

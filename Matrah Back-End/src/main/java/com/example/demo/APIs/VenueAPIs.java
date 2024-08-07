@@ -4,6 +4,7 @@ import com.example.demo.DTOs.VenueCreationDTO;
 import com.example.demo.Entites.Venue;
 import com.example.demo.Services.VenueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class VenueAPIs {
     private VenueService venueService;
 
     @PostMapping("/")
-    private ResponseEntity<Venue> creteVenue(@RequestBody VenueCreationDTO venueCreationDTO){
+    private ResponseEntity<Venue> createVenue(@RequestBody VenueCreationDTO venueCreationDTO){
         Venue savedVenue = venueService.createVenue(venueCreationDTO);
         return ResponseEntity.ok(savedVenue);
     }
@@ -39,10 +40,11 @@ public class VenueAPIs {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/all")
-    private ResponseEntity<List<Venue>> getAll(){
-        return ResponseEntity.ok(venueService.getAllVenues());
-    }
+        @GetMapping("/all")
+        public ResponseEntity<Page<Venue>> getAll(@RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "10") int size) {
+            return ResponseEntity.ok(venueService.getAllVenues(page, size));
+        }
 
     @GetMapping("city/{cityId}")
     private ResponseEntity<List<Venue>> getByCityId(@PathVariable int cityId){

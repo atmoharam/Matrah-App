@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="left">Left Sidebar</div>
+
+  <div class="middle">
+    <p>home-main works!</p>
+    @for (venue of venues; track venue.id){
+      <app-venue-card [venue]="venue"> </app-venue-card>
+    }
+  </div>
+  <div class="right">Right Sidebar</div>
+</div>

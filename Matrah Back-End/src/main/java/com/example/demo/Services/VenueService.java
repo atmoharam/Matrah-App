@@ -11,7 +11,14 @@ import com.example.demo.Repositories.UserRepository;
 import com.example.demo.Repositories.VenueRepository;
 import com.example.demo.Services.Interfaces.VenueServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
@@ -28,7 +35,9 @@ public class VenueService implements VenueServiceI {
     @Autowired
     private AreaRepository areaRepository;
 
+
     @Override
+//    @Cacheable(value = "venues", key = "#id")
     public Venue getVenueById(int id) {
         return venueRepository.findById(id).orElse(null);
     }
@@ -39,8 +48,10 @@ public class VenueService implements VenueServiceI {
     }
 
     @Override
-    public List<Venue> getAllVenues() {
-        return (List<Venue>) venueRepository.findAll();
+//    @Cacheable(value = "venues", key = "#page + '-' + #size")
+    public Page<Venue> getAllVenues(int size, int page) {
+        Pageable pageable = PageRequest.of(page, size);
+        return  venueRepository.findAll(pageable);
     }
 
     @Override
@@ -53,6 +64,7 @@ public class VenueService implements VenueServiceI {
     }
 
     @Override
+//    @CachePut(value = "venue", key = "#id")
     public Venue updateVenue(int id, Venue _venue) {
         Venue old = venueRepository.findById(id).orElse(null);
         if(old != null){
@@ -75,6 +87,7 @@ public class VenueService implements VenueServiceI {
     }
 
     @Override
+//    @CachePut(value = "venue", key = "#id")
     public Venue suspendVenue(int id) {
         Venue old = venueRepository.findById(id).orElse(null);
         if(old != null){
@@ -85,6 +98,7 @@ public class VenueService implements VenueServiceI {
     }
 
     @Override
+//    @CacheEvict(value = "venues", key = "#id")
     public boolean deleteVenue(int id) {
         Venue venue = venueRepository.findById(id).orElse(null);
         if(venue != null){

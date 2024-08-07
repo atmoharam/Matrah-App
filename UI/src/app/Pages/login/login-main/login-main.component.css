@@ -121,7 +121,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password],input[type=email] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -269,4 +269,55 @@ input[type=text]:placeholder {
 
 * {
   box-sizing: border-box;
+}
+
+
+/* Include the styles here */
+.radio-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-label {
+  position: relative;
+  padding-left: 25px;
+  margin-right: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  border: 2px solid #007BFF;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.radio-group input[type="radio"]:checked + .radio-label::before {
+  background-color: #007BFF;
+  border-color: #007BFF;
+}
+
+.radio-group input[type="radio"]:checked + .radio-label::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: #fff;
 }

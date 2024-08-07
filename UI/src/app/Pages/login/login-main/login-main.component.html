@@ -1,15 +1,9 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
-    <button class="active" (click)="swichForm()">Sign In </button>
-<!--    {{this.loginF}}-->
-    <h2 class="active">  </h2>
-    <h2 class="inactive underlineHover">Sign Up </h2>
+    <button style="margin-top: 50px; margin-bottom: 30px" (click)="switchForm()">Sign In </button>
+    <button  (click)="switchForm()">Sign Up </button>
 
-    <!-- Login Form -->
-    <div>
-
-    </div>
     @if (loginF){
       <form [formGroup]="loginForm" (ngSubmit) = "login()">
         <input type="text" id="login" class="fadeIn second" name="username" placeholder="username" formControlName="username">
@@ -18,10 +12,19 @@
       </form>
 
     } @else {
-      <form [formGroup]="loginForm" (ngSubmit) = "login()">
-        <input type="text" id="login" class="fadeIn second" name="username" placeholder="username" formControlName="username">
-        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" formControlName="password">
-        <input type="submit" class="fadeIn fourth" value="Log In" >
+      <form [formGroup]="registerForm" (ngSubmit) = "register()">
+        <input type="text"  class="fadeIn second" name="username" placeholder="username" formControlName="userName">
+        <input type="password"  class="fadeIn third" name="password" placeholder="Password" formControlName="password">
+        <input type="email"  class="fadeIn third" name="email" placeholder="E-mail" formControlName="email">
+        <input type="text"  class="fadeIn third" name="first name" placeholder="First Name" formControlName="firstName">
+        <input type="text"  class="fadeIn third" name="last name" placeholder="Last Name" formControlName="lastName">
+        <div class="radio-group" style="margin-top: 20px">
+          <input id="User" name="role" type="radio" value="User" formControlName="role">
+          <label for="User" class="radio-label">User</label>
+          <input id="Owner" name="role" type="radio" value="Owner" formControlName="role">
+          <label for="Owner" class="radio-label">Owner</label>
+        </div>
+        <input type="submit" class="fadeIn fourth" style="margin-top: 20px" value="Log In" >
       </form>
     }
     <!-- Remind Passowrd -->

@@ -17,8 +17,16 @@ public class ServiceE {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "services")
+        @ManyToMany(mappedBy = "services")
     private Set<Venue> venues;
+
+    public Set<Venue> getVenues() {
+        return venues;
+    }
+
+    public void setVenues(Set<Venue> venues) {
+        this.venues = venues;
+    }
 
     public ServiceE() {
     }
