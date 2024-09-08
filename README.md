@@ -42,7 +42,7 @@ The app features a user-friendly interface, personalized recommendations (to be 
 - **Mockito** and **JUnit 5**: Follow Test-Driven Development (TDD) practices to ensure robust unit and integration testing.
 
 ### Security
-- **Spring Security**: Handles user authentication and role-based access control (User, Owner, Admin).
+- **Spring Security**: Handles user authentication and role-based access control (User, Owner, Admin), and use JWT also.
 
 ### Development Methodology
 - **Agile**: The project follows an Agile development approach, with regular sprints and iterative delivery to ensure continuous improvement and adaptation.
