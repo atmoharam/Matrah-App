@@ -81,7 +81,7 @@ public class ReviewServiceTest {
         review.setRating(5);
         when(reviewRepository.save(review)).thenReturn(review);
 
-        Reviews result = reviewService.createNewBook(review);
+        Reviews result = reviewService.createNewReview(review);
         assertEquals(5, result.getRating());
     }
 

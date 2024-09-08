@@ -45,7 +45,7 @@ public class ReviewService implements ReviewsServiceI {
     }
 
     @Override
-    public Reviews createNewBook(Reviews _review) {
+    public Reviews createNewReview(Reviews _review) {
         return reviewRepository.save(_review);
     }
 }
